@@ -17,4 +17,4 @@ and then:
 # TODO
 
 1. buy one camera
-2. control the camera [微笑] 
+2. control the camera :smile:
