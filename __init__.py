@@ -1,10 +1,10 @@
 #! /usr/bin/python
 # -*- coding:utf-8 -*-
 
-#import control
+from config import config
+import control
 from flask import Flask, session, redirect, url_for, request, render_template
 app = Flask(__name__)
-import signal
 
 @app.route("/")
 @app.route("/index")
@@ -16,7 +16,7 @@ def index():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
 	if request.method == 'POST':
-		if request.form['key']=='123456':
+		if request.form['key']==config["web_pass"]:
 			session['username'] = 'admin'
 			return redirect(url_for('index'))
 	return render_template("login.html")
@@ -37,7 +37,7 @@ def control():
 
 	coordinate = (x,y)
 	print coordinate
-	#control.forward(coordinate)
+	control.forward(coordinate)
 	return "ok"
 
 def get_val(s):
@@ -51,7 +51,7 @@ def get_val(s):
 
 
 # set the secret key.  keep this really secret:
-app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
+app.secret_key = config["flask_secret_key"]
 
 if __name__ == "__main__":
-	app.run(host='0.0.0.0',debug=False,threaded=True)
+	app.run(host='0.0.0.0', debug=True, threaded=True)

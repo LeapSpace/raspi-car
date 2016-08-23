@@ -24,19 +24,27 @@
 		-moz-user-select: none;
 	}
 
-	form{
+	#login_form{
+		position: absolute;
 		width: 360px;
 		height: 360px;
 		margin: auto;  
 		position: absolute;
 		background-color: white;
 		top: 0; left: 0; bottom: 0; right: 0;
+		text-align: center;
 	}
-	
+	#login_form input{
+		position: static;
+		margin: 36px 12px;
+		width: 180px;
+		height: 36px;
+		border: 1px solid gray;
+	}
 	</style>
 </head>
 <body>
-	<form method="post">
+	<form id="login_form" method="post">
 		<input type="password" name="key" />
 		<input type="submit" name="submit">
 	</form>
