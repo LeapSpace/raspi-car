@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>circle</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<style type="text/css">
+
+	html,body {
+		/* 背景图垂直、水平均居中 */
+		background-position: center center;
+
+		/* 背景图不平铺 */
+		background-repeat: no-repeat;
+
+		/* 当内容高度大于图片高度时，背景图像的位置相对于viewport固定 */
+		background-attachment: fixed;
+
+		/* 让背景图基于容器大小伸缩 */
+		background-size: cover;
+
+		/* 设置背景颜色，背景图加载过程中会显示背景色 */
+		background-color: #d9d9d9;
+		-webkit-user-select: none;/*禁用手机浏览器的用户选择功能 */
+		-moz-user-select: none;
+	}
+
+	#coordinate_system{
+		margin: auto;  
+		position: absolute;
+		background-color: white;
+		top: 0; left: 0; bottom: 0; right: 0;
+	}
+	#infoImage{
+		display: none;
+	}
+	</style>
+</head>
+<body>
+	<canvas id="coordinate_system" width="360" height="360"></canvas>
+	<img id="infoImage" />
+	<script type="text/javascript">
+	window.onload = function() {
+		window.ontouchstart = function(e) { e.preventDefault(); };
+		var c = document.getElementById("coordinate_system");
+		var ctx=c.getContext("2d");
+		ctx.beginPath();
+		//x轴
+		ctx.moveTo(0,180);
+		ctx.lineTo(360,180);
+		//y轴
+		ctx.moveTo(180,0);
+		ctx.lineTo(180,360);
+		ctx.stroke();
+		//圆
+		ctx.beginPath();
+		ctx.arc(180,180,180,0,2*Math.PI);
+		ctx.stroke();
+
+		function drawLine(x,y){
+			ctx.moveTo(180,180);
+			ctx.lineTo(x,y);
+			ctx.stroke();
+		}
+
+		function getLocation(x, y) {  
+            var bbox = c.getBoundingClientRect();  
+            return {  
+                x: (x - bbox.left) * (c.width / bbox.width),  
+                y: (y - bbox.top) * (c.height / bbox.height)
+            };
+        }
+
+        /**
+        * 获取坐标信息并回传给服务器
+        */
+		var img = document.getElementById("infoImage");
+
+		document.getElementById("coordinate_system").addEventListener("touchmove",function(e){
+			getLocAndTrans(e);
+		})
+
+		document.getElementById("coordinate_system").addEventListener("touchstart",function(e){
+			getLocAndTrans(e);
+		})
+
+		document.getElementById("coordinate_system").addEventListener("touchend",function(e){
+			e.preventDefault();
+			img.src="/control?x=0&y=0"
+		})
+
+		function getLocAndTrans(e){
+			e.preventDefault(e);
+			var tmp = e.targetTouches[0];
+			var location = getLocation(tmp.pageX, tmp.pageY);
+			drawLine(location.x,location.y);
+			var loc = {x:location.x-180, y:-location.y+180};
+			console.log(loc);
+			img.src="/control?x="+loc.x+"&y="+loc.y;
+		}
+	}
+	</script>
+</body>
+</html>
