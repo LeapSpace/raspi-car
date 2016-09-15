@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 
 from config import config
-import control
+import car_control
 from flask import Flask, session, redirect, url_for, request, render_template
 app = Flask(__name__)
 
@@ -37,7 +37,7 @@ def control():
 
 	coordinate = (x,y)
 	print coordinate
-	control.forward(coordinate)
+	car_control.forward(coordinate)
 	return "ok"
 
 def get_val(s):

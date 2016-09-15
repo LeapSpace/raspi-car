@@ -95,6 +95,8 @@
 			drawLine(location.x,location.y);
 			var loc = {x:location.x-180, y:-location.y+180};
 			console.log(loc);
+			loc.x = loc.x*5/9;
+			loc.y = loc.y*5/9;
 			img.src="/control?x="+loc.x+"&y="+loc.y;
 		}
 	}
