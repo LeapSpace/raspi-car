@@ -46,7 +46,7 @@ class BroadcastOutput(object):
             '-r', str(float(camera.framerate)),
             '-'],
             stdin=PIPE, stdout=PIPE, stderr=io.open(os.devnull, 'wb'),
-            shell=False, close_fds=True)
+            shell=True, close_fds=True)
 
     def write(self, b):
         self.converter.stdin.write(b)
