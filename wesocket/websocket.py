@@ -70,10 +70,15 @@ class BroadcastThread(Thread):
 				print "fuck!!",i
 				i+=1
 				buf = self.converter.stdout.read(512)
+				print "fuck!!",i
 				if buf:
+					print "fuck!!",2
 					self.websocket_server.manager.broadcast(buf, binary=True)
 				elif self.converter.poll() is not None:
+					print "fuck!!",3
 					break
+				else:
+					print "fuck!!",4
 		except Exception as e:
 			print "here:",e
 		finally:
