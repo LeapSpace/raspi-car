@@ -65,11 +65,14 @@ class BroadcastThread(Thread):
 
     def run(self):
         try:
+        	i=0
             while True:
+            	print "fuck!!",i
+            	i+=1
                 buf = self.converter.stdout.read(512)
                 if buf:
                     self.websocket_server.manager.broadcast(buf, binary=True)
-                elif self.converter.poll() is None:
+                elif self.converter.poll() is not None:
                     break
         except Exception as e:
         	print "here:",e
