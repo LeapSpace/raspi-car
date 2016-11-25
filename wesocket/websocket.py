@@ -102,6 +102,8 @@ def main():
                 camera.wait_recording(1)
         except KeyboardInterrupt:
             pass
+        except Exception as e:
+        	print e
         finally:
             print('Stopping recording')
             camera.stop_recording()
