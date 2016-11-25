@@ -75,7 +75,7 @@ class BroadcastThread(Thread):
 				else:
 					continue
 		except Exception as e:
-			print "here:",e
+			raise e
 		finally:
 			self.converter.stdout.close()
 
@@ -108,7 +108,7 @@ def main():
 		except KeyboardInterrupt:
 			pass
 		except Exception as e:
-			print e
+			raise e
 		finally:
 			print('Stopping recording')
 			camera.stop_recording()
