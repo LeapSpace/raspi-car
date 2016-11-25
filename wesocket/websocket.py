@@ -71,6 +71,8 @@ class BroadcastThread(Thread):
                     self.websocket_server.manager.broadcast(buf, binary=True)
                 elif self.converter.poll() is not None:
                     break
+        except Exception as e:
+        	print "here:",e
         finally:
             self.converter.stdout.close()
 
@@ -103,7 +105,7 @@ def main():
         except KeyboardInterrupt:
             pass
         except Exception as e:
-        	print "here",e
+        	print e
         finally:
             print('Stopping recording')
             camera.stop_recording()
