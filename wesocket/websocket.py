@@ -40,11 +40,11 @@ class BroadcastOutput(object):
 			'-pix_fmt', 'yuv420p',
 			'-s', '%dx%d' % camera.resolution,
 			'-r', str(float(camera.framerate)),
-			'-i', '-',
+			'-i', '',
 			'-f', 'mpeg1video',
 			'-b', '800k',
 			'-r', str(float(camera.framerate)),
-			],
+			'-'],
 			stdin=PIPE, stdout=PIPE, stderr=io.open(os.devnull, 'wb'),
 			shell=True, close_fds=True)
 
@@ -67,17 +67,13 @@ class BroadcastThread(Thread):
 		try:
 			i=0
 			while True:
-				print "fuck!!",0
 				buf = self.converter.stdout.read(512)
-				print "fuck!!",1
 				if buf:
-					print "fuck!!",2
 					self.websocket_server.manager.broadcast(buf, binary=True)
 				elif self.converter.poll() is not None:
-					print "fuck!!",3
 					break
 				else:
-					print "fuck!!",4
+					continue
 		except Exception as e:
 			print "here:",e
 		finally:
