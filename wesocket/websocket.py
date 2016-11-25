@@ -44,7 +44,7 @@ class BroadcastOutput(object):
 			'-f', 'mpeg1video',
 			'-b', '800k',
 			'-r', str(float(camera.framerate)),
-			'-'],
+			],
 			stdin=PIPE, stdout=PIPE, stderr=io.open(os.devnull, 'wb'),
 			shell=True, close_fds=True)
 
