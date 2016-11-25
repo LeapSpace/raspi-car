@@ -67,10 +67,9 @@ class BroadcastThread(Thread):
 		try:
 			i=0
 			while True:
-				print "fuck!!",i
-				i+=1
+				print "fuck!!",0
 				buf = self.converter.stdout.read(512)
-				print "fuck!!",i
+				print "fuck!!",1
 				if buf:
 					print "fuck!!",2
 					self.websocket_server.manager.broadcast(buf, binary=True)
