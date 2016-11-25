@@ -103,7 +103,7 @@ def main():
         except KeyboardInterrupt:
             pass
         except Exception as e:
-        	print e
+        	print "here",e
         finally:
             print('Stopping recording')
             camera.stop_recording()
