@@ -36,11 +36,11 @@ class BroadcastOutput(object):
 		print('Spawning background conversion process')
 		self.converter = Popen([
 			'avconv',
-			'-f', 'rawvideo',
+			'-f', 'video4linux2',
 			'-pix_fmt', 'yuv420p',
 			'-s', '%dx%d' % camera.resolution,
 			'-r', str(float(camera.framerate)),
-			'-i', '',
+			'-i', '/dev/video0',
 			'-f', 'mpeg1video',
 			'-b', '800k',
 			'-r', str(float(camera.framerate)),
