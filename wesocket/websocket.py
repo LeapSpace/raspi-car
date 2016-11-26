@@ -41,6 +41,7 @@ class BroadcastOutput(object):
 			'-s', '%dx%d' % camera.resolution,
 			'-r', str(float(camera.framerate)),
 			'-i', '/dev/video0',
+			'-v', 'quiet',
 			'-f', 'mpeg1video',
 			'-b', '800k',
 			'-r', str(float(camera.framerate)),
