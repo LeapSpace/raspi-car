@@ -89,7 +89,7 @@ def main():
 		sleep(1) # camera warm-up time
 		print('Initializing websockets server on port %d' % WS_PORT)
 		websocket_server = make_server(
-			'', WS_PORT,
+			'127.0.0.1', WS_PORT,
 			server_class=WSGIServer,
 			handler_class=WebSocketWSGIRequestHandler,
 			app=WebSocketWSGIApplication(handler_cls=StreamingWebSocket))
